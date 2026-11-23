@@ -1,13 +1,24 @@
 
+import { useState } from 'react'
 import useProducts from '../hooks/useProducts'
+import useProductDetails from '../hooks/useProductDetails'
 import ProductList from '../components/ProductList'
+import ProductDetails from '../components/ProductDetails'
 import Loading from '../components/Loading'
 
 export default function ProductsPage() {
+  const [selectedProductId, setSelectedProductId] = useState(null)
+
   const { status, data, error } = useProducts({
     limit: 12,
     skip: 0,
   })
+
+  const {
+    status: detailsStatus,
+    data: productDetails,
+    error: detailsError,
+  } = useProductDetails(selectedProductId)
 
   return (
     <main className="min-h-screen bg-[#F5F7F4] px-5 py-12 sm:px-8">
@@ -26,32 +37,70 @@ export default function ProductsPage() {
           </p>
         </div>
 
-        {status === 'loading' && <Loading />}
-
-        {status === 'error' && (
-          <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-center">
-            <p className="font-semibold text-red-700">
-              Failed to load products.
-            </p>
-            <p className="mt-2 text-sm text-red-600">
-              {error.message}
-            </p>
-          </div>
-        )}
-
-        {status === 'success' && (
+        {selectedProductId !== null ? (
           <>
-            <div className="mb-6 flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-[#263D35]">
-                Available Products
-              </h2>
+            {detailsStatus === 'loading' && <Loading />}
 
-              <span className="text-sm text-gray-500">
-                {data.total} products available
-              </span>
-            </div>
+            {detailsStatus === 'error' && (
+              <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-center">
+                <p className="font-semibold text-red-700">
+                  Failed to load product details.
+                </p>
 
-            <ProductList products={data.products} />
+                <p className="mt-2 text-sm text-red-600">
+                  {detailsError.message}
+                </p>
+
+                <button
+                  onClick={() => setSelectedProductId(null)}
+                  className="mt-5 rounded-lg bg-[#315C4C] px-5 py-2 text-sm font-semibold text-white"
+                >
+                  Back to Products
+                </button>
+              </div>
+            )}
+
+            {detailsStatus === 'success' && (
+              <ProductDetails
+                product={productDetails}
+                onBack={() => setSelectedProductId(null)}
+              />
+            )}
+          </>
+        ) : (
+          <>
+            {status === 'loading' && <Loading />}
+
+            {status === 'error' && (
+              <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-center">
+                <p className="font-semibold text-red-700">
+                  Failed to load products.
+                </p>
+
+                <p className="mt-2 text-sm text-red-600">
+                  {error.message}
+                </p>
+              </div>
+            )}
+
+            {status === 'success' && (
+              <>
+                <div className="mb-6 flex items-center justify-between">
+                  <h2 className="text-lg font-semibold text-[#263D35]">
+                    Available Products
+                  </h2>
+
+                  <span className="text-sm text-gray-500">
+                    {data.total} products available
+                  </span>
+                </div>
+
+                <ProductList
+                  products={data.products}
+                  onViewDetails={setSelectedProductId}
+                />
+              </>
+            )}
           </>
         )}
       </div>
