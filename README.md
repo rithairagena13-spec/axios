@@ -1,19 +1,108 @@
-# React + Vite
+# Product Explorer Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A modern and responsive Product Explorer Dashboard built with React and Axios. This project demonstrates how to fetch and manage API data using React's `useEffect` hook, custom hooks, and a reusable API service layer.
 
-Currently, two official plugins are available:
+## Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The Product Explorer Dashboard retrieves product information from the [DummyJSON API](https://dummyjson.com/) and displays it in a clean, organized interface.
 
-## React Compiler
+It demonstrates how React applications communicate with external APIs while managing loading states, errors, and successfully fetched data.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Features
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+- **API Integration:** Fetches product data using Axios.
+- **Custom Hook:** Uses `useProducts` to manage product fetching and state.
+- **Loading State:** Displays a loading indicator while data is being retrieved.
+- **Error Handling:** Provides feedback when an API request fails.
+- **Reusable Components:** Organizes the interface into reusable components.
+- **Responsive Design:** Uses Tailwind CSS to create a responsive layout.
+- **Request Cancellation:** Uses AbortController to cancel unfinished requests when necessary.
 
-## Expanding the Oxlint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- React
+- JavaScript
+- Vite
+- Axios
+- Tailwind CSS
+- DummyJSON API
+- Git and GitHub
+
+## Project Structure
+
+```text
+src/
+├── api/
+│   ├── client.js
+│   └── products.js
+├── components/
+│   ├── Loading.jsx
+│   ├── ProductCard.jsx
+│   └── ProductList.jsx
+├── hooks/
+│   └── useProducts.js
+├── pages/
+│   └── ProductPage.jsx
+├── App.jsx
+├── main.jsx
+└── index.css
+```
+
+## Getting Started
+
+Follow these steps to run the project locally.
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/rithairagena13-spec/axios.git
+```
+
+### 2. Navigate to the project folder
+
+```bash
+cd axios/week9-data-fetching
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Start the development server
+
+```bash
+npm run dev
+```
+
+Open the local URL provided by Vite in your browser.
+
+## API Source
+
+This project uses the DummyJSON Products API:
+
+https://dummyjson.com/products
+
+## Learning Objectives
+
+Through this project, I practiced:
+
+- Fetching API data with Axios.
+- Managing side effects using `useEffect`.
+- Managing component state with `useState`.
+- Creating and using custom React hooks.
+- Separating API services from UI components.
+- Handling loading and error states.
+- Using AbortController to manage API request cancellation.
+- Building reusable React components.
+
+## Author
+
+**Ritha IRAGENA**
+
+GitHub: [rithairagena13-spec](https://github.com/rithairagena13-spec)
+
+---
+
+*Built as part of Week 9: Data Fetching in React with useEffect.*
