@@ -1,5 +1,5 @@
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, onViewDetails }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-[#E5EAE6] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg">
       <div className="flex h-52 items-center justify-center bg-[#F5F7F4] p-5">
@@ -32,6 +32,13 @@ export default function ProductCard({ product }) {
             ⭐ {product.rating}
           </span>
         </div>
+
+        <button
+          onClick={() => onViewDetails(product.id)}
+          className="w-full rounded-xl bg-[#315C4C] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#263D35]"
+        >
+          View Details
+        </button>
       </div>
     </div>
   )
