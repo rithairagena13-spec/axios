@@ -35,7 +35,7 @@ export default function ProductCard({ product, onViewDetails }) {
 
         <button
           onClick={() => onViewDetails(product.id)}
-          className="w-full rounded-xl bg-[#315C4C] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#263D35]"
+          className="w-full rounded-xl bg-[#A98250] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#89683D] hover:shadow-md"
         >
           View Details
         </button>
